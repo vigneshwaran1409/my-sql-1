@@ -1,0 +1,375 @@
+SQL Lesson 1: SELECT queries 101
+ 
+1.Select title from  movies;
+2.Select director from movies;
+3.Select title,director from movies;
+4.Select title,year from movies;
+5.Select *from movies
+
+
+
+
+
+
+
+
+
+
+
+
+SQL Lesson 2: Queries with constraints (Pt. 1)
+ 
+
+1.where id-6;
+2.where year between 2000 and 2010;
+3.where year not between 2000 and 2010;
+4.where year
+   LIMITS 5;
+
+
+
+
+
+
+
+
+
+
+
+
+SQL Lesson 3: Queries with constraints (Pt. 2)
+ 
+1.where title like “toy story”
+2.where director=”john Lasseter”
+3.where director!=”john Lasseter”
+4.title like “wall-s”
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SQL Lesson 4: Filtering and sorting Query results
+ 
+
+1.distinct director
+    From movies
+    Order by director;
+2.select*
+   From movies
+   Order by year DESC
+   LIMIT 4;
+3.select *
+  From movies
+  Order by title
+   LIMIT 5;
+4.select*
+    From movies
+    Order by title
+    LIMIT 5
+    OFFSET 5;
+
+
+
+SQL Review: Simple SELECT Queries
+ 
+1.	Select city,population
+From north-american-cities
+Where country=”Canada”;
+2.	Select *
+From north-american-cities
+Where country=’united states’
+Order by latitude DESC
+3.	Select *
+From north-american-cities
+Where longitude<(
+From north-american-cities
+Where city=’chicago’
+)
+Order by longitude-ASC
+
+4.	Select *
+From north-american-cities
+Where country=’mexico’
+Order by population DESC
+Limit 2
+5.	Select *
+From north-american-cities
+Where country=’unitied states’
+Order by population DESC
+LIMIT 2
+OFFSET 2
+
+
+
+
+
+SQL Lesson 6: Multi-table queries with JOINs
+
+ 
+
+1.	Select title,domestic-sales,international-sales
+From movies
+Join boxoffice
+On movies.id=boxoffice.movie-id;
+
+2.select title,domestic-sales,international-sales
+    From movies
+    Join boxoffice
+    On movies.id=boxoffice.movie-id;
+    Where international-sales>domestic-sales;
+   3.Select title,rating
+     From movies
+     Join boxoffice
+     On movies.id=boxoffice.movie-id
+       Order by rating DESC
+
+
+
+
+
+
+SQL Lesson 7: OUTER JOINs
+ 
+
+1.select distinct building from employees;
+2.select * from buildings;
+3.select distinct building-name,role
+   From buildings
+   LEFT JOIN employees
+  ON building-name=building;
+
+
+
+
+
+
+
+
+
+
+
+
+
+SQL Lesson 8: A short note on NULLs
+
+ 
+1.Select  name,role from employees
+Where building is null;
+2.Select distinct building-name
+    From buildings
+    Left join employees
+     On building-name=building
+      Where role is null;
+
+
+
+
+
+
+
+
+
+
+
+
+SQL Lesson 9: Queries with expressions
+ 
+
+1.Select title ,(domestic-sales+international-sales)gross-sales-millions
+    From movies
+    Join boxoffice
+    On movies.id=boxoffice.movie-id;
+2.Select title,rating * 10 as rating-percent
+     From movies
+     Join boxoffice
+     On movies.id=boxoffice.movie-id;
+3.Select title,year
+    From movies
+     Where year%2=0;
+
+
+
+
+
+
+
+
+SQL Lesson 10: Queries with aggregates (Pt. 1)
+ 
+
+1.	Select max (year-employed) as max-years-employed
+From employees;
+2.	Select role,avg(years-employed)as average-years-employed
+From employees
+Group by role;
+         3.Select building,sum(years-employed)as total-years-employed
+From employees
+Group by building;
+
+
+
+
+
+
+
+
+
+
+
+
+
+SQL Lesson 11: Queries with aggregates (Pt. 2)
+ 
+
+
+1.select role,count(*)as number-of-artists
+From employees
+Where role=”artist”;
+2.Select role,count(*)
+From employees
+Group by role;
+3.Select role,sum(years-employed)
+From employees
+Group by role
+Having role=”engineer”;
+
+
+
+
+
+
+
+
+SQL Lesson 12: Order of execution of a Query
+ 
+1.select director,count(id) as num-movies-directed
+ From movies
+Group by director;
+2.select director,sum(domestic-sales-international-sales)as cumulative-sales-from-all-movies
+From movies
+Inner join boxoffice
+On movies.id=boxoffice.movie-id
+Group by director;
+
+
+
+
+
+
+
+
+
+
+
+SQL Lesson 13: Inserting rows
+ 
+
+1.insert into movies values(4,”toy story 4”,”E1 directore”,2015-90);
+2.insert into boxoffice values(4,8-7,340000000,270000000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SQL Lesson 14: Updating rows
+ 
+1.update movies
+Set director=”john Lasseter”
+Where id=2;
+2.update movies
+Set year=1999
+Where id=3;
+3.update movies
+Set title=”toy story 3”,director=”leeunkrich”
+Where id=11;
+
+
+
+
+
+
+
+
+SQL Lesson 15: Deleting rows
+ 
+1.	Delete from movies
+Where year<2005;
+        2.delete from movies
+            Where director=”Andrew Stanton”;
+
+
+
+
+
+
+
+
+
+
+
+
+
+SQL Lesson 16: Creating tables
+ 
+
+1.	Create table database(
+Name TEXT
+Version FLOAT
+Dounload-count INTEGER
+);
+
+
+
+
+
+
+
+
+
+
+
+
+SQL Lesson 17: Altering tables
+ 
+1.	Alter table movies
+Add column aspect-ratio float default 2-39;
+2.	Alter table movies
+Add column language TEXT default “English”;
+
+
+
+
+
+
+
+
+
+
+
+
+SQL Lesson 18: Dropping tables
+ 
+1.	Drop table movies;
+2.	Drop table boxoffice;
